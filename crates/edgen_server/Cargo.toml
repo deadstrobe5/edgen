@@ -13,6 +13,7 @@ dashmap = { workspace = true }
 derive_more = { workspace = true }
 edgen_rt_llama_cpp = { path = "../edgen_rt_llama_cpp" }
 edgen_rt_whisper_cpp = { path = "../edgen_rt_whisper_cpp" }
+edgen_rag = { path = "../edgen_rag" }
 either = { workspace = true, features = ["serde"] }
 futures = { workspace = true }
 hf-hub = "0.3.2"

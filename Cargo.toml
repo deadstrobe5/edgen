@@ -7,7 +7,7 @@ members = [
     "crates/edgen_rt_llama_cpp",
     "crates/edgen_rt_whisper_cpp",
     "edgen/src-tauri"
-]
+, "crates/edgen_rag"]
 
 [workspace.dependencies]
 ahash = "0.8.6"

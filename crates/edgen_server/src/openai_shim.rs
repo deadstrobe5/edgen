@@ -40,6 +40,8 @@ use uuid::Uuid;
 use edgen_core::settings::SETTINGS;
 use edgen_core::whisper::WhisperEndpointError;
 
+use edgen_rag;
+
 use crate::model::{Model, ModelError, ModelKind};
 
 /// The plaintext or image content of a [`ChatMessage`] within a [`CreateChatCompletionRequest`].
@@ -617,7 +619,15 @@ pub async fn chat_completions(
             model_name: model_name.to_string(),
         })?;
 
-    let untokenized_context = format!("{}<|ASSISTANT|>", req.messages);
+    // Modify the context based on RAG processing if activated
+    let activate_rag = true;
+    let untokenized_context = if activate_rag {
+        edgen_rag::process_with_rag(&format!("{}<|ASSISTANT|>", req.messages))
+    } else {
+        format!("{}<|ASSISTANT|>", req.messages)
+    };
+
+    println!("{}", untokenized_context);
 
     let stream_response = if let Some(stream) = req.stream {
         stream
